@@ -1,0 +1,13 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t behlers/docker-react -f Dockerfile.dev .
+
+# commands
+# if any of these commands return a non-zero code, travis
+#  assumes the build failed
+script:
+  - docker run -e CI=true behlers/docker-react npm run test 

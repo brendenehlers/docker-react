@@ -16,6 +16,11 @@ RUN npm run build
 # Run Phase
 FROM nginx
 
+# expose the port 80 to outside the container
+#  does nothing in development, but AWS EBS will
+#  find this during the deploy and expose it 
+EXPOSE 80
+
 # copy the build output from the previous section 
 COPY --from=builder /home/node/app/build /usr/share/nginx/html
 

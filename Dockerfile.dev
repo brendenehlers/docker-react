@@ -1,0 +1,16 @@
+FROM node:16-alpine
+
+USER node
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+
+COPY --chown=node:node package.json .
+
+RUN npm install
+
+# this instruction is technically optional
+# but you should keep this here because it is needed 
+#  in production
+COPY --chown=node:node . .
+
+CMD ["npm", "start"]
